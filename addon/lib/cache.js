@@ -77,6 +77,9 @@ export function cacheAvailabilityResults(infoHash, fileIds) {
 
 export function removeAvailabilityResults(infoHash, fileIds) {
   const key = `${AVAILABILITY_KEY_PREFIX}:${infoHash}`;
+  if (fileIds === undefined) {
+      return mongoCache.delete(key);
+  }
   const fileIdsString = fileIds.toString();
   return mongoCache.get(key)
       .then(result => {

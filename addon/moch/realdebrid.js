@@ -126,6 +126,7 @@ export async function resolve({ ip, isBrowser, apiKey, infoHash, fileIndex }) {
         }
         if (isInfringingFileError(error)) {
           console.log(`Infringing file removed from RealDebrid ${infoHash} [${fileIndex}]`);
+          removeAvailabilityResults(infoHash);
           return StaticResponse.FAILED_INFRINGEMENT;
         }
         if (isLimitExceededError(error)) {
