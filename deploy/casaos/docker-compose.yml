@@ -1,0 +1,68 @@
+name: torznab-bridge
+services:
+  torznab-bridge:
+    image: torznab-bridge:latest
+    container_name: torznab-bridge
+    environment:
+      PORT: "9699"
+      TORZNAB_SOURCES: stremio,betor
+      TORZNAB_STREMIO_URL: https://torrentio.strem.fun/brazuca
+      TORZNAB_BETOR_URL: https://catalogo.betor.top
+      TORZNAB_BASE_URL: http://192.168.1.100:9699
+      TORZNAB_CONFIGURATION: brazuca
+      TORZNAB_RUNTIME_CONFIG_PATH: /config/torznab-ui.json
+    labels:
+      icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/icon.png
+    ports:
+      - target: 9699
+        published: "9699"
+        protocol: tcp
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: /DATA/AppData/torznab-bridge/config
+        target: /config
+    x-casaos:
+      ports:
+        - container: "9699"
+          description:
+            en_us: Torznab Bridge Web UI and API port.
+            pt_br: Porta da Web UI e da API do Torznab Bridge.
+      volumes:
+        - container: /config
+          description:
+            en_us: Persistent configuration directory.
+            pt_br: Diretorio persistente de configuracao.
+      envs:
+        - container: TORZNAB_BASE_URL
+          description:
+            en_us: Public base URL used in generated links.
+            pt_br: URL publica usada nos links gerados.
+        - container: TORZNAB_SOURCES
+          description:
+            en_us: Enabled sources, comma-separated.
+            pt_br: Fontes habilitadas, separadas por virgula.
+networks:
+  default:
+    name: torznab-bridge_default
+x-casaos:
+  architectures:
+    - amd64
+  author: Matheus / Codex
+  category: Downloader
+  description:
+    en_us: Torznab metadata bridge with a simple source and provider picker UI.
+    pt_br: Bridge de metadados Torznab com UI simples para escolher fontes e providers.
+  developer: Matheus
+  icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Prowlarr/icon.png
+  index: /
+  is_uncontrolled: false
+  main: torznab-bridge
+  port_map: "9699"
+  store_app_id: torznab-bridge
+  tagline:
+    en_us: Torznab bridge with BeTor and Torrentio support.
+    pt_br: Bridge Torznab com suporte a BeTor e Torrentio.
+  title:
+    en_us: Torznab Bridge
+    pt_br: Torznab Bridge

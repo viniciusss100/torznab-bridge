@@ -1,0 +1,9 @@
+Torznab Bridge
+Copyright 2026 Matheus
+
+This product includes adapted components derived from:
+
+- TheBeastLT/torrentio-scraper (Apache-2.0), base commit e99fedb
+- betorbr/betor-catalog integration notes and behavior derived from the public BeTor project (MIT)
+
+See THIRD_PARTY_NOTICES.md for attribution details.
